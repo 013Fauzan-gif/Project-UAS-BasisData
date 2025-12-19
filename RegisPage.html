@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #289cea;
+            --secondary: #7aefff;
+            --accent: #279f41;
+            --warning: #E18E2E;
+            --light: #88f3d5;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+        
+        .register-container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 100%;
+            max-width: 480px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .register-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+        
+        .register-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 30px 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .register-header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+        }
+        
+        .register-header h2 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.8rem;
+            position: relative;
+        }
+        
+        .register-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            position: relative;
+        }
+        
+        .register-body {
+            padding: 30px;
+        }
+        
+        .form-control {
+            border-radius: 12px;
+            padding: 14px 18px;
+            border: 2px solid #e1e5ee;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 0.25rem rgba(67, 181, 173, 0.25);
+        }
+        
+        .btn-register {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            color: white;
+        }
+        
+        .btn-register:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(39, 157, 159, 0.4);
+        }
+        
+        .btn-register:active {
+            transform: translateY(-1px);
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .form-check-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(39, 157, 159, 0.25);
+        }
+        
+        .dropdown-divider {
+            margin: 25px 0;
+            border-top: 1px solid #e1e5ee;
+        }
+        
+        .dropdown-item {
+            border-radius: 8px;
+            padding: 10px 15px;
+            transition: all 0.2s;
+            color: var(--primary);
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(67, 181, 173, 0.1);
+            color: var(--primary);
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6c757d;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .password-container {
+            position: relative;
+        }
+        
+        .alert {
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            border: none;
+        }
+        
+        .alert-success {
+            background-color: rgba(67, 181, 173, 0.15);
+            color: var(--primary);
+        }
+        
+        .alert-danger {
+            background-color: rgba(234, 72, 40, 0.15);
+            color: var(--accent);
+        }
+        
+        .alert-info {
+            background-color: rgba(255, 233, 122, 0.3);
+            color: #856d1a;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #495057;
+        }
+        
+        .register-footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #6c757d;
+            background-color: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .floating-icon {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+        
+        .floating-icon:nth-child(1) {
+            top: 20px;
+            left: 20px;
+            color: var(--accent);
+        }
+        
+        .floating-icon:nth-child(2) {
+            top: 20px;
+            right: 20px;
+            color: var(--accent);
+        }
+        
+        .floating-icon:nth-child(3) {
+            bottom: 20px;
+            left: 20px;
+            color: var(--light);
+        }
+        
+        .floating-icon:nth-child(4) {
+            bottom: 20px;
+            right: 20px;
+            color: var(--light);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .shake {
+            animation: shake 0.5s;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .progress-container {
+            margin-bottom: 20px;
+        }
+        
+        .progress {
+            height: 8px;
+            border-radius: 10px;
+            background-color: #e9ecef;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .password-strength {
+            font-size: 0.85rem;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+        
+        .strength-weak {
+            color: var(--accent);
+        }
+        
+        .strength-medium {
+            color: var(--warning);
+        }
+        
+        .strength-strong {
+            color: var(--primary);
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #e9ecef;
+            z-index: 1;
+        }
+        
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #6c757d;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .step.completed {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        .btn-next, .btn-prev {
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-weight: 600;
+        }
+        
+        .btn-next {
+            background-color: var(--primary);
+            border: none;
+            color: white;
+        }
+        
+        .btn-prev {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-header">
+            <i class="bi bi-person-plus-fill floating-icon pulse"></i>
+            <i class="bi bi-shield-check floating-icon"></i>
+            <i class="bi bi-key-fill floating-icon"></i>
+            <i class="bi bi-person-check floating-icon"></i>
+            
+            <h2>Buat Akun Baru</h2>
+            <p>Bergabunglah dengan komunitas kami</p>
+        </div>
+        
+        <div class="register-body">
+            <div id="alertContainer"></div>
+            
+            <!-- Step Indicator -->
+            <div class="step-indicator">
+                <div class="step active" id="step1">1</div>
+                <div class="step" id="step2">2</div>
+                <div class="step" id="step3">3</div>
+            </div>
+            
+            <form id="registerForm">
+                <!-- Step 1: Informasi Pribadi -->
+                <div class="form-step active" id="step1Form">
+                    <h5 class="mb-4" style="color: var(--primary);">Informasi Pribadi</h5>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName" class="form-label">Nama Depan</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Nama depan">
+                            <div class="invalid-feedback" id="firstNameError">
+                                Nama depan harus diisi.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName" class="form-label">Nama Belakang</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Nama belakang">
+                            <div class="invalid-feedback" id="lastNameError">
+                                Nama belakang harus diisi.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Alamat Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="nama@contoh.com">
+                        <div class="invalid-feedback" id="emailError">
+                            Harap masukkan alamat email yang valid.
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Nomor Telepon</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="08xxxxxxxxxx">
+                        <div class="invalid-feedback" id="phoneError">
+                            Harap masukkan nomor telepon yang valid.
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-next" id="nextToStep2">Selanjutnya</button>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Informasi Akun -->
+                <div class="form-step" id="step2Form">
+                    <h5 class="mb-4" style="color: var(--primary);">Informasi Akun</h5>
+                    
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Kata Sandi</label>
+                        <div class="password-container">
+                            <input type="password" class="form-control" id="password" placeholder="Buat kata sandi">
+                            <button type="button" class="password-toggle" id="passwordToggle">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress">
+                                <div class="progress-bar" id="passwordStrengthBar" role="progressbar" style="width: 0%"></div>
+                            </div>
+                            <div class="password-strength" id="passwordStrengthText">Kekuatan kata sandi</div>
+                        </div>
+                        <div class="invalid-feedback" id="passwordError">
+                            Kata sandi harus minimal 8 karakter dan mengandung huruf besar, huruf kecil, dan angka.
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="confirmPassword" class="form-label">Konfirmasi Kata Sandi</label>
+                        <div class="password-container">
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Ulangi kata sandi">
+                            <button type="button" class="password-toggle" id="confirmPasswordToggle">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="invalid-feedback" id="confirmPasswordError">
+                            Konfirmasi kata sandi tidak cocok.
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-prev" id="prevToStep1">Kembali</button>
+                        <button type="button" class="btn btn-next" id="nextToStep3">Selanjutnya</button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Persetujuan -->
+                <div class="form-step" id="step3Form">
+                    <h5 class="mb-4" style="color: var(--primary);">Persetujuan</h5>
+                    
+                    <div class="mb-4">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="termsAgreement">
+                            <label class="form-check-label" for="termsAgreement">
+                                Saya setuju dengan <a href="#" style="color: var(--primary);">Syarat dan Ketentuan</a>
+                            </label>
+                            <div class="invalid-feedback" id="termsError">
+                                Anda harus menyetujui syarat dan ketentuan.
+                            </div>
+                        </div>
+                        
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="privacyAgreement">
+                            <label class="form-check-label" for="privacyAgreement">
+                                Saya setuju dengan <a href="#" style="color: var(--primary);">Kebijakan Privasi</a>
+                            </label>
+                            <div class="invalid-feedback" id="privacyError">
+                                Anda harus menyetujui kebijakan privasi.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="newsletterSubscription">
+                            <label class="form-check-label" for="newsletterSubscription">
+                                Saya ingin berlangganan newsletter untuk mendapatkan informasi terbaru
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-prev" id="prevToStep2">Kembali</button>
+                        <button type="submit" class="btn btn-register" id="registerButton">
+                            <span id="buttonText">Daftar Sekarang</span>
+                            <div class="spinner-border spinner-border-sm d-none" role="status" id="buttonSpinner">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            
+            <div class="dropdown-divider"></div>
+            
+            <div class="text-center">
+                <span style="color: #6c757d;">Sudah punya akun? </span>
+                <a href="LoginPage.html" class="text-decoration-none fw-bold" style="color: var(--primary);" id="loginLink">Masuk di sini</a>
+            </div>
+        </div>
+        
+        <div class="register-footer">
+            &copy; 2023 Aplikasi Kami. All rights reserved.
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elemen DOM
+            const registerForm = document.getElementById('registerForm');
+            const steps = document.querySelectorAll('.step');
+            const formSteps = document.querySelectorAll('.form-step');
+            let currentStep = 0;
+            
+            // Input fields
+            const firstNameInput = document.getElementById('firstName');
+            const lastNameInput = document.getElementById('lastName');
+            const emailInput = document.getElementById('email');
+            const phoneInput = document.getElementById('phone');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const termsAgreement = document.getElementById('termsAgreement');
+            const privacyAgreement = document.getElementById('privacyAgreement');
+            
+            // Buttons
+            const nextToStep2Btn = document.getElementById('nextToStep2');
+            const nextToStep3Btn = document.getElementById('nextToStep3');
+            const prevToStep1Btn = document.getElementById('prevToStep1');
+            const prevToStep2Btn = document.getElementById('prevToStep2');
+            const registerButton = document.getElementById('registerButton');
+            const buttonText = document.getElementById('buttonText');
+            const buttonSpinner = document.getElementById('buttonSpinner');
+            const alertContainer = document.getElementById('alertContainer');
+            const loginLink = document.getElementById('loginLink');
+            
+            // Password toggles
+            const passwordToggle = document.getElementById('passwordToggle');
+            const confirmPasswordToggle = document.getElementById('confirmPasswordToggle');
+            
+            // Password strength
+            const passwordStrengthBar = document.getElementById('passwordStrengthBar');
+            const passwordStrengthText = document.getElementById('passwordStrengthText');
+            
+            // Navigasi step
+            nextToStep2Btn.addEventListener('click', function() {
+                if (validateStep1()) {
+                    goToStep(1);
+                }
+            });
+            
+            nextToStep3Btn.addEventListener('click', function() {
+                if (validateStep2()) {
+                    goToStep(2);
+                }
+            });
+            
+            prevToStep1Btn.addEventListener('click', function() {
+                goToStep(0);
+            });
+            
+            prevToStep2Btn.addEventListener('click', function() {
+                goToStep(1);
+            });
+            
+            // Toggle visibilitas password
+            passwordToggle.addEventListener('click', function() {
+                togglePasswordVisibility(passwordInput, this);
+            });
+            
+            confirmPasswordToggle.addEventListener('click', function() {
+                togglePasswordVisibility(confirmPasswordInput, this);
+            });
+            
+            // Validasi real-time untuk password strength
+            passwordInput.addEventListener('input', function() {
+                checkPasswordStrength(this.value);
+            });
+            
+            // Submit form
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateStep3()) {
+                    simulateRegistration();
+                }
+            });
+            
+            // Fungsi navigasi step
+            function goToStep(step) {
+                // Sembunyikan step aktif
+                formSteps[currentStep].classList.remove('active');
+                steps[currentStep].classList.remove('active');
+                
+                // Tampilkan step baru
+                formSteps[step].classList.add('active');
+                steps[step].classList.add('active');
+                
+                // Tandai step sebelumnya sebagai completed
+                if (step > currentStep) {
+                    for (let i = 0; i < step; i++) {
+                        steps[i].classList.add('completed');
+                    }
+                } else {
+                    for (let i = step + 1; i < steps.length; i++) {
+                        steps[i].classList.remove('completed');
+                    }
+                }
+                
+                currentStep = step;
+            }
+            
+            // Fungsi toggle password visibility
+            function togglePasswordVisibility(input, toggleBtn) {
+                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                input.setAttribute('type', type);
+                
+                // Ganti ikon
+                const icon = toggleBtn.querySelector('i');
+                if (type === 'password') {
+                    icon.classList.remove('bi-eye-slash');
+                    icon.classList.add('bi-eye');
+                } else {
+                    icon.classList.remove('bi-eye');
+                    icon.classList.add('bi-eye-slash');
+                }
+            }
+            
+            // Fungsi validasi step 1
+            function validateStep1() {
+                let isValid = true;
+                resetValidation();
+                
+                // Validasi nama depan
+                if (firstNameInput.value.trim() === '') {
+                    showError(firstNameInput, 'firstNameError', 'Nama depan harus diisi.');
+                    isValid = false;
+                }
+                
+                // Validasi nama belakang
+                if (lastNameInput.value.trim() === '') {
+                    showError(lastNameInput, 'lastNameError', 'Nama belakang harus diisi.');
+                    isValid = false;
+                }
+                
+                // Validasi email
+                const email = emailInput.value.trim();
+                if (!isValidEmail(email)) {
+                    showError(emailInput, 'emailError', 'Harap masukkan alamat email yang valid.');
+                    isValid = false;
+                }
+                
+                // Validasi telepon
+                const phone = phoneInput.value.trim();
+                if (!isValidPhone(phone)) {
+                    showError(phoneInput, 'phoneError', 'Harap masukkan nomor telepon yang valid.');
+                    isValid = false;
+                }
+                
+                return isValid;
+            }
+            
+            // Fungsi validasi step 2
+            function validateStep2() {
+                let isValid = true;
+                resetValidation();
+                
+                // Validasi password
+                const password = passwordInput.value;
+                if (!isValidPassword(password)) {
+                    showError(passwordInput, 'passwordError', 'Kata sandi harus minimal 8 karakter dan mengandung huruf besar, huruf kecil, dan angka.');
+                    isValid = false;
+                }
+                
+                // Validasi konfirmasi password
+                if (password !== confirmPasswordInput.value) {
+                    showError(confirmPasswordInput, 'confirmPasswordError', 'Konfirmasi kata sandi tidak cocok.');
+                    isValid = false;
+                }
+                
+                return isValid;
+            }
+            
+            // Fungsi validasi step 3
+            function validateStep3() {
+                let isValid = true;
+                resetValidation();
+                
+                // Validasi persetujuan syarat dan ketentuan
+                if (!termsAgreement.checked) {
+                    showError(termsAgreement, 'termsError', 'Anda harus menyetujui syarat dan ketentuan.');
+                    isValid = false;
+                }
+                
+                // Validasi persetujuan kebijakan privasi
+                if (!privacyAgreement.checked) {
+                    showError(privacyAgreement, 'privacyError', 'Anda harus menyetujui kebijakan privasi.');
+                    isValid = false;
+                }
+                
+                return isValid;
+            }
+            
+            // Fungsi reset validasi
+            function resetValidation() {
+                const inputs = document.querySelectorAll('.form-control, .form-check-input');
+                inputs.forEach(input => {
+                    input.classList.remove('is-invalid');
+                });
+                clearAlert();
+            }
+            
+            // Fungsi menampilkan error
+            function showError(input, errorId, message) {
+                input.classList.add('is-invalid');
+                document.getElementById(errorId).textContent = message;
+                
+                // Animasi shake untuk input
+                if (input.classList.contains('form-control')) {
+                    input.classList.add('shake');
+                    setTimeout(() => input.classList.remove('shake'), 500);
+                }
+            }
+            
+            // Fungsi membersihkan alert
+            function clearAlert() {
+                alertContainer.innerHTML = '';
+            }
+            
+            // Fungsi menampilkan alert
+            function showAlert(message, type) {
+                const alert = document.createElement('div');
+                alert.className = `alert alert-${type} alert-dismissible fade show`;
+                alert.innerHTML = `
+                    <div class="d-flex align-items-center">
+                        <i class="bi ${type === 'success' ? 'bi-check-circle-fill' : type === 'danger' ? 'bi-exclamation-triangle-fill' : 'bi-info-circle-fill'} me-2"></i>
+                        <div>${message}</div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                alertContainer.appendChild(alert);
+                
+                // Auto dismiss setelah 5 detik untuk alert success
+                if (type === 'success') {
+                    setTimeout(() => {
+                        if (alert.parentNode) {
+                            alert.remove();
+                        }
+                    }, 5000);
+                }
+            }
+            
+            // Fungsi validasi email
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+            // Fungsi validasi telepon
+            function isValidPhone(phone) {
+                const phoneRegex = /^[0-9]{10,13}$/;
+                return phoneRegex.test(phone);
+            }
+            
+            // Fungsi validasi password
+            function isValidPassword(password) {
+                // Minimal 8 karakter, mengandung huruf besar, huruf kecil, dan angka
+                const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+                return passwordRegex.test(password);
+            }
+            
+            // Fungsi cek kekuatan password
+            function checkPasswordStrength(password) {
+                let strength = 0;
+                let text = '';
+                let barWidth = 0;
+                let barColor = '';
+                
+                if (password.length >= 8) strength++;
+                if (/[a-z]/.test(password)) strength++;
+                if (/[A-Z]/.test(password)) strength++;
+                if (/[0-9]/.test(password)) strength++;
+                if (/[^a-zA-Z0-9]/.test(password)) strength++;
+                
+                switch(strength) {
+                    case 0:
+                    case 1:
+                        text = 'Sangat Lemah';
+                        barWidth = 20;
+                        barColor = 'var(--accent)';
+                        passwordStrengthText.className = 'password-strength strength-weak';
+                        break;
+                    case 2:
+                        text = 'Lemah';
+                        barWidth = 40;
+                        barColor = 'var(--accent)';
+                        passwordStrengthText.className = 'password-strength strength-weak';
+                        break;
+                    case 3:
+                        text = 'Cukup';
+                        barWidth = 60;
+                        barColor = 'var(--warning)';
+                        passwordStrengthText.className = 'password-strength strength-medium';
+                        break;
+                    case 4:
+                        text = 'Kuat';
+                        barWidth = 80;
+                        barColor = 'var(--primary)';
+                        passwordStrengthText.className = 'password-strength strength-strong';
+                        break;
+                    case 5:
+                        text = 'Sangat Kuat';
+                        barWidth = 100;
+                        barColor = 'var(--secondary)';
+                        passwordStrengthText.className = 'password-strength strength-strong';
+                        break;
+                }
+                
+                passwordStrengthBar.style.width = `${barWidth}%`;
+                passwordStrengthBar.style.backgroundColor = barColor;
+                passwordStrengthText.textContent = `Kekuatan kata sandi: ${text}`;
+            }
+            
+            // Proses registrasi ke database
+            function simulateRegistration() {
+                // Tampilkan loading state
+                buttonText.classList.add('d-none');
+                buttonSpinner.classList.remove('d-none');
+                registerButton.disabled = true;
+                
+                // Ambil data dari form
+                const firstName = firstNameInput.value.trim();
+                const lastName = lastNameInput.value.trim();
+                const nama = `${firstName} ${lastName}`.trim();
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+                
+                // Kirim data ke API
+                fetch('http://localhost:3000/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                        nama: nama
+                    })
+                })
+                .then(response => {
+                    // Cek apakah response adalah JSON
+                    const contentType = response.headers.get('content-type');
+                    if (contentType && contentType.includes('application/json')) {
+                        return response.json();
+                    } else {
+                        // Jika bukan JSON, baca sebagai text
+                        return response.text().then(text => {
+                            throw new Error(`Server error: ${text}`);
+                        });
+                    }
+                })
+                .then(data => {
+                    // Reset loading state
+                    buttonText.classList.remove('d-none');
+                    buttonSpinner.classList.add('d-none');
+                    registerButton.disabled = false;
+                    
+                    if (data.status === 'success') {
+                        // Registrasi berhasil
+                        showAlert(data.message || 'Registrasi berhasil! Anda akan dialihkan ke halaman login.', 'success');
+                        
+                        // Alihkan ke halaman login setelah 2 detik
+                        setTimeout(() => {
+                            window.location.href = 'LoginPage.html';
+                        }, 2000);
+                    } else {
+                        // Registrasi gagal
+                        showAlert(data.message || 'Registrasi gagal. Silakan coba lagi.', 'danger');
+                    }
+                })
+                .catch(error => {
+                    // Reset loading state
+                    buttonText.classList.remove('d-none');
+                    buttonSpinner.classList.add('d-none');
+                    registerButton.disabled = false;
+                    
+                    // Error koneksi atau server
+                    console.error('Error:', error);
+                    let errorMessage = 'Terjadi kesalahan saat menghubungi server. ';
+                    
+                    if (error.message.includes('Cannot POST')) {
+                        errorMessage += 'Endpoint /api/register tidak ditemukan. Pastikan server sudah di-restart setelah perubahan.';
+                    } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                        errorMessage += 'Pastikan server berjalan di http://localhost:3000';
+                    } else {
+                        errorMessage += error.message;
+                    }
+                    
+                    showAlert(errorMessage, 'danger');
+                });
+            }
+            
+            // Animasi saat halaman dimuat
+            const registerContainer = document.querySelector('.register-container');
+            registerContainer.style.opacity = '0';
+            registerContainer.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                registerContainer.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                registerContainer.style.opacity = '1';
+                registerContainer.style.transform = 'translateY(0)';
+            }, 200);
+        });
+    </script>
+</body>
+</html>
